@@ -9,8 +9,3 @@
       docker_image:
        name: busybox
        source: pull
-    - name: deploy container
-      docker_container:
-       name: first_container
-       image: busybox
-       state: present
