@@ -2,8 +2,4 @@
 - hosts: all
   become: yes
   tasks:
-    - docker_container:
-        name: mydata
-        image: busybox
-        volumes:
-          - /data
+    - docker_container: name: mydata image: busybox
