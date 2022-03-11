@@ -19,6 +19,10 @@
       pip:
         name: docker-py
         state: present
-    - name: pull an image
-      docker_image:
-        name: pacur/centos-7
+    - name: Start the container
+      docker_container:
+        name: sampleapp
+        image: "greensclass/sampleapp:{{DOCKER_TAG}}"
+        state: started
+        published_ports:
+          - 0.0.0.0:8080:8080
