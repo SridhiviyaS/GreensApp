@@ -19,3 +19,6 @@
       pip:
         name: docker-py
         state: present
+    - name: pull an image
+      docker_image:
+        name: pacur/centos-7
