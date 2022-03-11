@@ -1,5 +1,16 @@
 ---
-- hosts: all
-  become: yes
-  tasks:
-    - docker_container: name: mydata image: busybox
+ - name: manage docker using ansible
+   hosts: all
+   become: true
+   tasks:
+    - name: ping hosts
+      ping:
+    - name: pull docker image
+      docker_image:
+       name: busybox
+       source: pull
+    - name: deploy container
+      docker_container:
+       name: first_container
+       image: busybox
+       state: present
