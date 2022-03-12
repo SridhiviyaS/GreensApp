@@ -20,6 +20,20 @@
       pip:
         name: docker-py
         state: present
+       docker:
+    - name: docker_pull_test
+        registry: "registry.hub.docker.com"
+        username: "greensclass"
+        password: "{{ dockerhubPass }}"
+        image: registry.hub.docker.com/ubuntu:latest
+        command: /bin/echo success
+        state: present
+
+    - name: remove container
+      docker: 
+        name: docker_pull_test
+        image: registry.hub.docker.com/ubuntu:latest
+        state: absent
     - name: Start the container
       docker_container:
         name: sampleapp
