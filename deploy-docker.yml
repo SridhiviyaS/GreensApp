@@ -20,23 +20,3 @@
       pip:
         name: docker-py
         state: present
-    - name: docker_pull_test
-        registry: "registry.hub.docker.com"
-        username: "greensclass"
-        password: "Awsdevops2021#"
-        image: registry.hub.docker.com/ubuntu:latest
-        command: /bin/echo success
-        state: present
-
-    - name: remove container
-      docker: 
-        name: docker_pull_test
-        image: registry.hub.docker.com/ubuntu:latest
-        state: absent
-   # - name: Start the container
-    #  docker_container:
-     #   name: sampleapp
-      #  image: "greensclass/sampleapp:{{DOCKER_TAG}}"
-       # state: started
-        #published_ports:
-         # - 0.0.0.0:8080:8080
