@@ -1,50 +1,49 @@
 pipeline{
-    agent any
+    agent any 
     tools {
-      maven 'maven3'
+        maven 'maven'
     }
     environment {
-      DOCKER_TAG = getVersion()
+        DOCKER_TAG = getVersion()
     }
     stages{
-        stage('SCM'){
+        stage("SCM checkoout") {
             steps{
-                git credentialsId: 'github', 
-                    url: 'https://github.com/javahometech/dockeransiblejenkins'
-            }
+                git 'https://github.com/SridhiviyaS/dockeransiblejenkins'
+                }
         }
-        
-        stage('Maven Build'){
+        stage("Maven Build") {
             steps{
-                sh "mvn clean package"
-            }
+                sh 'mvn clean package'
+                }
         }
-        
-        stage('Docker Build'){
+        stage("Docker Build") {
             steps{
-                sh "docker build . -t kammana/hariapp:${DOCKER_TAG} "
-            }
+                sh "docker build . -t greensclass/sampleapp:${DOCKER_TAG} ."
+                }
         }
-        
-        stage('DockerHub Push'){
+        stage("DockerHub Push") {
             steps{
-                withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubPwd')]) {
-                    sh "docker login -u kammana -p ${dockerHubPwd}"
+                withCredentials([string(credentialsId: 'dockerpass', variable: 'dockerhubPass')]) {
+                    sh "docker login  -u greensclass -p ${dockerhubPass}"
                 }
                 
-                sh "docker push kammana/hariapp:${DOCKER_TAG} "
-            }
+                sh "docker push greensclass/sampleapp:${DOCKER_TAG}"
+                }
         }
-        
-        stage('Docker Deploy'){
+        stage("DOCKER webserver install") {
             steps{
-              ansiblePlaybook credentialsId: 'dev-server', disableHostKeyChecking: true, extras: "-e DOCKER_TAG=${DOCKER_TAG}", installation: 'ansible', inventory: 'dev.inv', playbook: 'deploy-docker.yml'
-            }
+                ansiblePlaybook credentialsId: 'dev-server', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'dev.inv', playbook: 'deploy-docker.yml'
+                }
         }
+
+       
     }
 }
 
 def getVersion(){
     def commitHash = sh label: '', returnStdout: true, script: 'git rev-parse --short HEAD'
     return commitHash
+
 }
+
