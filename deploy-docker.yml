@@ -20,7 +20,6 @@
       pip:
         name: docker-py
         state: present
-       docker:
     - name: docker_pull_test
         registry: "registry.hub.docker.com"
         username: "greensclass"
@@ -34,10 +33,10 @@
         name: docker_pull_test
         image: registry.hub.docker.com/ubuntu:latest
         state: absent
-    - name: Start the container
-      docker_container:
-        name: sampleapp
-        image: "greensclass/sampleapp:{{DOCKER_TAG}}"
-        state: started
-        published_ports:
-          - 0.0.0.0:8080:8080
+   # - name: Start the container
+    #  docker_container:
+     #   name: sampleapp
+      #  image: "greensclass/sampleapp:{{DOCKER_TAG}}"
+       # state: started
+        #published_ports:
+         # - 0.0.0.0:8080:8080
