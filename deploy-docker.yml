@@ -18,7 +18,4 @@
     - name: Install docker-py python module
       pip:
         name: docker-py
-        state: present
-    - name: deploy docker container 
-      shell: docker run -itd --name httpdcontainer -p 8090:80 httpd
-         
+        state: present      
