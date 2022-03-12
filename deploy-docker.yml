@@ -24,7 +24,7 @@
     - name: docker_pull_test
         registry: "registry.hub.docker.com"
         username: "greensclass"
-        password: "{{ dockerhubPass }}"
+        password: "Awsdevops2021#"
         image: registry.hub.docker.com/ubuntu:latest
         command: /bin/echo success
         state: present
