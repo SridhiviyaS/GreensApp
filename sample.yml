@@ -20,4 +20,4 @@
         name: docker-py
         state: present      
     - name: deploy delpoy
-      shell: docker run -itd --name greens2app -p '8080:8080'  greensclass/greensapp: "{{ DOCKER_TAG }}"
+      shell: docker run -itd --name greens2app -p '8080:8080'  greensclass/greensapp:"{{ DOCKER_TAG }}"
