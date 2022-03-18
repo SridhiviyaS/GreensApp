@@ -30,14 +30,8 @@
         state: restarted
         enabled: true
 
-    - name: "Docker image from docker hub"
-      docker_image:
-       name: "{{ container_image }}"
-       source: pull
-
-    - name: "Create a container from image"
-      docker_container:
-       name: "{{ container_name }}"
-       image: "{{ container_image }}"
-       ports: "{{ container_port }}"
-       state: started
+   - name: Log into DockerHub
+     docker_login:
+       username: greensclass
+       password: Awsdevops2021#
+       email: docker@docker.io
