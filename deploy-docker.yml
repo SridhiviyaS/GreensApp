@@ -19,7 +19,10 @@
       pip:
         name: docker-py
         state: present      
-    - name: deploy login
-      shell: docker login  -u greensclass -p Awsdevops2021#
-    - name: deploy delpoy
-      shell: docker run -itd --name greens2app -p '8070:8080'  greensclass/sampleapp:f5ea492
+    - name: Start the container
+      docker_container:
+        name: greensapp
+        image: "greensclass/greensapp:{{DOCKER_TAG}}"
+        state: started
+        published_ports:
+          - 0.0.0.0:8080:8080
