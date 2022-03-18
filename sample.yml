@@ -1,0 +1,25 @@
+---
+- hosts: all
+  become: True
+  tasks:
+    - name: Install python pip
+      yum:
+        name: python-pip
+        state: present
+    - name: Install docker
+      yum:
+        name: docker
+        state: present
+    - name: start docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+    - name: Install docker-py python module
+      pip:
+        name: docker-py
+        state: present      
+    - name: deploy login
+      shell: docker login  -u greensclass -p Awsdevops2021#
+    - name: deploy delpoy
+      shell: docker run -itd --name greens2app -p '8070:8080'  greensclass/sampleapp:f5ea492
