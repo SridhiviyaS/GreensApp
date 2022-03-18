@@ -20,6 +20,6 @@
         name: docker-py
         state: present      
     - name: deploy login
-      shell: docker login  -u greensclass -p Awsdevops2021#
+      shell: "docker login  -u greensclass -p ${dockerpass}"
     - name: deploy delpoy
-      shell: docker run -itd --name greens2app -p '8070:8080'  greensclass/sampleapp:f5ea492
+      shell: "docker run -itd --name greens2app -p '8070:8080'  greensclass/sampleapp:${DOCKER_TAG}"
