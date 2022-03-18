@@ -20,7 +20,7 @@
         name: docker-py
         state: present      
     - name: Start the container
-      docker_container:
+      ansible_docker_container:
         name: greensapp
         image: "greensclass/greensapp:{{DOCKER_TAG}}"
         state: started
