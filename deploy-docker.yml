@@ -19,5 +19,5 @@
       pip:
         name: docker-py
         state: present      
-    - name: deploy delpoy
+    - name: deploy container
       shell: docker run -itd --name greens2app -p '8080:8080'  greensclass/greensapp:"{{ DOCKER_TAG }}"
